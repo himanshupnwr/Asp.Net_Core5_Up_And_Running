@@ -6,9 +6,11 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Rocky.Data;
 using Rocky.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Rocky.Controllers
 {
+    [Authorize(Roles = WebConstants.AdminRole)]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Rocky.Data;
 using Microsoft.AspNetCore.Identity;
+using Rocky.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Rocky
 {
@@ -32,7 +34,9 @@ namespace Rocky
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+
+            //need to add the di for email service as transient so that every time we send a mail we get a new object
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddHttpContextAccessor();
             services.AddSession(Options =>
             {

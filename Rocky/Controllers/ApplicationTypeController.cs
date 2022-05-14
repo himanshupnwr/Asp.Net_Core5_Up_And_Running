@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Rocky.Data;
 using Rocky.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Rocky.Controllers
 {
+    [Authorize(Roles = WebConstants.AdminRole)]
     public class ApplicationTypeController : Controller
     {
         private readonly ApplicationDbContext _db;
