@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Rocky.Data;
-using Rocky.Models;
-using Rocky.Utility;
-using Rocky.ViewModels;
+using Rocky_DataAccess.Data;
+using Rocky_Models;
+using Rocky_Utility;
+using Rocky_Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -45,7 +45,7 @@ namespace Rocky.Controllers
                 shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
             }
 
-            DetailsVM DetailsVM = new DetailsVM()
+            var DetailsVM = new DetailsVM()
             {
                 Product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType)
                 .Where(u => u.Id == id).FirstOrDefault(),

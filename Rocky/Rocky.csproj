@@ -37,4 +37,10 @@
     <Folder Include="wwwroot\images\Product\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Rocky_DataAccess\Rocky_DataAccess.csproj" />
+    <ProjectReference Include="..\Rocky_Models\Rocky_Models.csproj" />
+    <ProjectReference Include="..\Rocky_Utility\Rocky_Utility.csproj" />
+  </ItemGroup>
+
 </Project>

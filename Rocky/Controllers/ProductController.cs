@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.EntityFrameworkCore;
-using Rocky.Data;
-using Rocky.Models;
-using Rocky.ViewModels;
+using Rocky_DataAccess.Data;
+using Rocky_Models;
+using Rocky_Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Rocky_Utility;
 
 namespace Rocky.Controllers
 {
