@@ -10,6 +10,10 @@ namespace Rocky_Models
 {
     public class Product
     {
+        public Product()
+        {
+            TempSqft = 1;
+        }
         [Key]
         public int Id { get; set; }
         [Required]
@@ -28,5 +32,11 @@ namespace Rocky_Models
         public int ApplicationTypeId { get; set; }
         [ForeignKey("ApplicationTypeId")]
         public virtual ApplicationType ApplicationType { get; set; }
+
+        //Not Mapped attribute will not make the property entry in DB using EF if this attribute is there
+        //Can be used for NonDB related entities
+        [NotMapped]
+        [Range(1,1000)]
+        public int TempSqft { get; set; }
     }
 }

@@ -12,7 +12,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Rocky_DataAccess.Data;
 using Rocky_Utility;
+using Rocky_DataAccess.Repository;
+using Rocky_DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Rocky_Utility.BrainTree;
 
 namespace Rocky
 {
@@ -34,9 +37,7 @@ namespace Rocky
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //need to add the di for email service as transient so that every time we send a mail we get a new object
-            services.AddTransient<IEmailSender, EmailSender>();
+            
             services.AddHttpContextAccessor();
             services.AddSession(Options =>
             {
@@ -45,6 +46,19 @@ namespace Rocky
                 Options.Cookie.IsEssential = true;
                 Options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
             });
+            services.Configure<BrainTreeSettings>(Configuration.GetSection("BrainTree"));
+            services.AddSingleton<IBrainTreeGate, BrainTreeGate>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
+            services.AddScoped<IInquiryDetailRepository, InquiryDetailRepository>();
+            services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            //need to add the di for email service as transient so that every time we send a mail we get a new object
+            services.AddTransient<IEmailSender, EmailSender>();
+
             services.AddControllersWithViews();
         }
 
